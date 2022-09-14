@@ -1,0 +1,77 @@
+{
+	"name": "pattern",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "firstblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "pattern_matching.csv",
+				"container": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "Date",
+				"type": "String"
+			},
+			{
+				"name": "Rank",
+				"type": "String"
+			},
+			{
+				"name": "Sunshine hours(City)",
+				"type": "String"
+			},
+			{
+				"name": "Cost of a bottle of water(City)",
+				"type": "String"
+			},
+			{
+				"name": "Obesity levels(Country)",
+				"type": "String"
+			},
+			{
+				"name": "Life expectancy(years) (Country)",
+				"type": "String"
+			},
+			{
+				"name": "Pollution(Index score) (City)",
+				"type": "String"
+			},
+			{
+				"name": "Annual avg. hours worked",
+				"type": "String"
+			},
+			{
+				"name": "Happiness levels(Country)",
+				"type": "String"
+			},
+			{
+				"name": "Outdoor activities(City)",
+				"type": "String"
+			},
+			{
+				"name": "Number of take out places(City)",
+				"type": "String"
+			},
+			{
+				"name": "Cost of a monthly gym membership(City)",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

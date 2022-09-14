@@ -1,0 +1,81 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Excel1",
+						"type": "DatasetReference"
+					},
+					"name": "excel"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Exceloutput",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Date as string,",
+				"          HOUR as string,",
+				"          GENDER as string,",
+				"          PRODUCT as string,",
+				"          COLOR as string,",
+				"          SIZE as string,",
+				"          {SALE CONSULTANT} as string,",
+				"          QUANTITY as string,",
+				"          PRICE as string,",
+				"          VAT as string,",
+				"          TOTAL as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     rowUrlColumn: 'Processed_filename',",
+				"     wildcardPaths:['*']) ~> excel",
+				"excel sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Date_value as date,",
+				"          HOUR_value as string,",
+				"          GENDER as string,",
+				"          PRODUCT as string,",
+				"          COLOR as string,",
+				"          SIZE_value as string,",
+				"          SALE_CONSULTANT_QUANTITY as string,",
+				"          PRICE as string,",
+				"          VAT_TOTAL as string,",
+				"          Processed_filename as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Date_value = Date,",
+				"          HOUR_value = HOUR,",
+				"          GENDER,",
+				"          PRODUCT,",
+				"          COLOR,",
+				"          SIZE_value = SIZE,",
+				"          SALE_CONSULTANT_QUANTITY = {SALE CONSULTANT},",
+				"          PRICE,",
+				"          VAT_TOTAL = QUANTITY,",
+				"          Processed_filename",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

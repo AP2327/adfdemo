@@ -1,0 +1,9 @@
+{
+	"name": "mudhalpipe",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "34da8372-1610-4a33-88dc-3ef41c88f8f7",
+		"tenantId": "a4aabc96-b516-4dd4-8182-0db711052692"
+	}
+}

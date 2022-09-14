@@ -1,0 +1,141 @@
+{
+	"name": "patternmatching",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "pattern",
+						"type": "DatasetReference"
+					},
+					"name": "Pattern"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Corrpt_record",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "match_record",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
+				}
+			],
+			"transformations": [
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          City as string,",
+				"          Date as string,",
+				"          Rank as string,",
+				"          {Sunshine hours(City)} as string,",
+				"          {Cost of a bottle of water(City)} as string,",
+				"          {Obesity levels(Country)} as string,",
+				"          {Life expectancy(years) (Country)} as string,",
+				"          {Pollution(Index score) (City)} as string,",
+				"          {Annual avg. hours worked} as string,",
+				"          {Happiness levels(Country)} as string,",
+				"          {Outdoor activities(City)} as string,",
+				"          {Number of take out places(City)} as string,",
+				"          {Cost of a monthly gym membership(City)} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     limit: 100,",
+				"     ignoreNoFilesFound: false) ~> Pattern",
+				"Pattern split(isNull(toDate(Date,'mm/dd/yyyy')),",
+				"     disjoint: false) ~> split1@(corrupted, matching)",
+				"split1@corrupted sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          City as string,",
+				"          Date_value as string,",
+				"          Rank_value as string,",
+				"          Sunshine_hours as string,",
+				"          Cost_of_a_bottle_of_water as string,",
+				"          Obesity_levels as string,",
+				"          Life_expectancy as string,",
+				"          Pollution as string,",
+				"          Annual_avg_hours_worked as string,",
+				"          Happiness_levels as string,",
+				"          Outdoor_activities as string,",
+				"          Number_of_take_out_places as string,",
+				"          Cost_of_a_monthly_gym_membership as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          City,",
+				"          Date_value = Date,",
+				"          Rank_value = Rank,",
+				"          Sunshine_hours = {Sunshine hours(City)},",
+				"          Cost_of_a_bottle_of_water = {Cost of a bottle of water(City)},",
+				"          Obesity_levels = {Obesity levels(Country)},",
+				"          Life_expectancy = {Life expectancy(years) (Country)},",
+				"          Pollution = {Pollution(Index score) (City)},",
+				"          Annual_avg_hours_worked = {Annual avg. hours worked},",
+				"          Happiness_levels = {Happiness levels(Country)},",
+				"          Outdoor_activities = {Outdoor activities(City)},",
+				"          Number_of_take_out_places = {Cost of a bottle of water(City)},",
+				"          Cost_of_a_monthly_gym_membership = {Cost of a monthly gym membership(City)}",
+				"     )) ~> sink1",
+				"split1@matching sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          City as string,",
+				"          Date_value as string,",
+				"          Rank_value as string,",
+				"          Sunshine_hours as string,",
+				"          Cost_of_a_bottle_of_water as string,",
+				"          Obesity_levels as string,",
+				"          Life_expectancy as string,",
+				"          Pollution as string,",
+				"          Annual_avg_hours_worked as string,",
+				"          Happiness_levels as string,",
+				"          Outdoor_activities as string,",
+				"          Number_of_take_out_places as string,",
+				"          Cost_of_a_monthly_gym_membership as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          City,",
+				"          Date_value = Date,",
+				"          Rank_value = Rank,",
+				"          Sunshine_hours = {Sunshine hours(City)},",
+				"          Cost_of_a_bottle_of_water = {Cost of a bottle of water(City)},",
+				"          Obesity_levels = {Obesity levels(Country)},",
+				"          Life_expectancy = {Life expectancy(years) (Country)},",
+				"          Pollution = {Pollution(Index score) (City)},",
+				"          Annual_avg_hours_worked = {Annual avg. hours worked},",
+				"          Happiness_levels = {Happiness levels(Country)},",
+				"          Outdoor_activities = {Outdoor activities(City)},",
+				"          Number_of_take_out_places = {Number of take out places(City)},",
+				"          Cost_of_a_monthly_gym_membership = {Cost of a monthly gym membership(City)}",
+				"     )) ~> sink2"
+			]
+		}
+	}
+}

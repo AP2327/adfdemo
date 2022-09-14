@@ -1,0 +1,70 @@
+{
+	"name": "Corrpt_record",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "firstlink",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "City",
+				"type": "varchar"
+			},
+			{
+				"name": "Date_value",
+				"type": "varchar"
+			},
+			{
+				"name": "Rank_value",
+				"type": "varchar"
+			},
+			{
+				"name": "Sunshine_hours",
+				"type": "varchar"
+			},
+			{
+				"name": "Cost_of_a_bottle_of_water",
+				"type": "varchar"
+			},
+			{
+				"name": "Obesity_levels",
+				"type": "varchar"
+			},
+			{
+				"name": "Life_expectancy",
+				"type": "varchar"
+			},
+			{
+				"name": "Pollution",
+				"type": "varchar"
+			},
+			{
+				"name": "Annual_avg_hours_worked",
+				"type": "varchar"
+			},
+			{
+				"name": "Happiness_levels",
+				"type": "varchar"
+			},
+			{
+				"name": "Outdoor_activities",
+				"type": "varchar"
+			},
+			{
+				"name": "Number_of_take_out_places",
+				"type": "varchar"
+			},
+			{
+				"name": "Cost_of_a_monthly_gym_membership",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "corrupt_records"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,48 @@
+{
+	"name": "uqoutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "firstblob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "output"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "101",
+				"type": "String"
+			},
+			{
+				"name": "Anish",
+				"type": "String"
+			},
+			{
+				"name": "Databricks",
+				"type": "String"
+			},
+			{
+				"name": "CosmosDB",
+				"type": "String"
+			},
+			{
+				"name": "21",
+				"type": "String"
+			},
+			{
+				"name": "chennai",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
